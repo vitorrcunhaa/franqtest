@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="Vitor Cunha">
+	<meta name="image" property="og:image" content="https://i.postimg.cc/xjXmG1MH/ps-logo.jpg">
+	<meta name="description" property="og:description" content="Franq Test - By Vitor Cunha">
+
+	<title>Franq Test by Vitor Cunha</title>
+	{% load static %}
+
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+	<link rel="manifest" href="{% static 'site.webmanifest' %}">
+	<link rel="mask-icon" href="{% static 'safari-pinned-tab.svg' %}" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<!-- Custom fonts for this template-->
+	<link href="{% static "vendor/fontawesome-free/css/all.min.css" %}" rel="stylesheet" type="text/css">
+	<!-- Custom styles for this template-->
+	<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+	<link href="{% static "css/tags.css" %}" rel="stylesheet">
+	<!-- Bootstrap core JavaScript-->
+	<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+
+	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+</head>
+<body>
+<div class="container" style="padding: 30px;">
+	<div class="row justify-content-center">
+		<a href="{% url 'home' %}" style="padding-left: 5%;" title="Go Home"><i class="fas fa-home fa-lg"
+																																						style="color: #5a6268;"></i> </a>
+		<a href="{% url 'logout' %}" style="float: right; padding-right: 5%;" title="Logout"><i
+			class="fas fa-sign-out-alt fa-lg" style="color: #5a6268;"></i> </a><br><br>
+		<h2 class="text-center">Franq Test</h2>
+		<h4 class="text-center" style="margin-bottom:25px;">By <a href="https://vitorcunha.me">Vítor Cunha</a></h4>
+	</div>
+</div>
+</body>
+</html>

@@ -46,11 +46,6 @@ Start a local web server:
 
 In your browser, go to http://localhost:8000/admin.
 
-## Register
-
-The application already accept users to register and login. Feel free to create new users and login.
-
-When creating new users, mock customers objects will automatically be created.
 
 ---------------------------------------------------------------------
 
@@ -79,18 +74,22 @@ senha: teste123456
 
 Sinta-se a vontade para brincar dentro da aplicação ou para registrar novos usuários e fazer login.
 
-
+Esta aplicação possui dois tipos de usuários: Consumidor ou Administrador.
 
 A aplicação em questão simula um sistema de cadastro de veículos, onde existe um usuário administrador que pode fazer quase qualquer tipo de operação no sistema, e o usuário do tipo consumidor que tem apenas algumas permissões.
-
-Esta aplicação possui dois tipos de usuários: Consumidor ou Administrador.
 
 O administrador tem permissões de adicionar, editar ou deletar veículos. Dentro disto está inclusive colocar um veículo na garagem de algum consumidor, aumentar o saldo do consumidor, etc.
 
 O administrador também possui permissão de edição de dados básicos do usuário.
+
+O usuário consumidor quando é criado, começa por padrão com 100000 de saldo.
 
 O consumidor pode apenas comprar veículas de uma lista de veículos previamente adicionados por um administrador.
 
 O consumidor só podera comprar veículos se tiver saldo suficiente para tal.
 
 O consumidor terá disponível em sua garagem os veículos que comprou ou que foram adicionados a ele pelo administrador.
+
+### Mudança de escopo - explicação
+
+Algumas especificações do teste não fizeram sentido pra mim, por este motivo adicionei novos métodos, novas páginas, autenticação, deploy e alguns pontos mais complexos para que como um todo a aplicação fizesse sentido e conseguisse simular algo mais próximo do mundo real.

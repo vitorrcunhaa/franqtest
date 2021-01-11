@@ -33,6 +33,7 @@ AUTH_USER_MODEL = 'core.User'
 
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
+    'garage.apps.GarageConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,6 +127,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/core'
 LOGOUT_REDIRECT_URL = 'home'

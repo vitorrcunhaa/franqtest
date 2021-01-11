@@ -1,0 +1,75 @@
+{% extends 'core/index.html' %}
+
+{% block content %}
+	<h2>Vehicles List</h2>
+	{% if request.user.is_superuser %}
+		<p>
+			<button class="btn btn-default" style="border-color: #1b1e21"><a href="vehicle_new">Add a new vehicle</a></button>
+		</p>
+	{% endif %}
+
+	<div class="row">
+		<div class="col-sm-12">
+			<table class="table table-bordered" width="100%" cellspacing="0" role="grid">
+				{% if request.user.is_superuser %}
+					<thead>
+					<tr role="row">
+						<th>Owner</th>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Color</th>
+						<th>Year</th>
+						<th>Price</th>
+						<th>Icon</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for vehicle in object_list %}
+						<tr role="row">
+							<td style="vertical-align: middle">{{ vehicle.owner }}</td>
+							<td style="vertical-align: middle">{{ vehicle.name }}</td>
+							<td style="vertical-align: middle">{{ vehicle.get_type_display }}</td>
+							<td style="vertical-align: middle">{{ vehicle.color }}</td>
+							<td style="vertical-align: middle">{{ vehicle.year }}</td>
+							<td style="vertical-align: middle">{{ vehicle.price }}</td>
+							<td><img src="/media/{{ vehicle.icon }}" height="60" width="60"></td>
+							<td style="vertical-align: middle"><a href="vehicle_edit/{{ vehicle.id }}">Edit</a></td>
+							<td style="vertical-align: middle"><a href="vehicle_delete/{{ vehicle.id }}">Delete</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				{% else %}
+					<thead>
+					<tr role="row">
+						<th>Owner</th>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Color</th>
+						<th>Year</th>
+						<th>Price</th>
+						<th>Icon</th>
+						<th>Buy</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for vehicle in object_list %}
+						<tr role="row">
+							<td style="vertical-align: middle">{{ vehicle.owner }}</td>
+							<td style="vertical-align: middle">{{ vehicle.name }}</td>
+							<td style="vertical-align: middle">{{ vehicle.get_type_display }}</td>
+							<td style="vertical-align: middle">{{ vehicle.color }}</td>
+							<td style="vertical-align: middle">{{ vehicle.year }}</td>
+							<td style="vertical-align: middle">{{ vehicle.price }}</td>
+							<td><img src="/media/{{ vehicle.icon }}" height="60" width="60"></td>
+							<td style="vertical-align: middle"><a href="{% url 'buy_vehicle' vehicle.id %}">Buy</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				{% endif %}
+			</table>
+		</div>
+	</div>
+
+{% endblock %}

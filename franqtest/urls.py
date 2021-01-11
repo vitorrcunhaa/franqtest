@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.generic.base import TemplateView
 
@@ -27,5 +28,9 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', views.register, name='register'),
     path('core/', include('core.urls'), name='core'),
+    path('vehicle/', include('garage.urls'), name='vehicles'),
+    path('users', login_required(views.UsersList.as_view()), name='users_list'),
+    path('user_edit/<int:pk>/', login_required(views.UserUpdate.as_view()), name='user_edit'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

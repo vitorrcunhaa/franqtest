@@ -8,7 +8,7 @@
 	<meta name="image" property="og:image" content="https://i.postimg.cc/xjXmG1MH/ps-logo.jpg">
 	<meta name="description" property="og:description" content="Franq Test - By Vitor Cunha">
 
-	<title>Franq Test by Vitor Cunha</title>
+	<title>Franq Test - Garage System</title>
 	{% load static %}
 
 	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
@@ -23,12 +23,14 @@
 	<link href="{% static "vendor/fontawesome-free/css/all.min.css" %}" rel="stylesheet" type="text/css">
 	<!-- Custom styles for this template-->
 	<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
-	<link href="{% static "css/tags.css" %}" rel="stylesheet">
+	<link href="{% static "css/sb-admin.css" %}" rel="stylesheet">
 	<!-- Bootstrap core JavaScript-->
 	<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 	<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 	<!-- Core plugin JavaScript-->
 	<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+	<script src="{% static 'js/index_helper.js' %}"></script>
+	<script src="{% static 'js/sb-admin.min.js' %}"></script>
 
 
 	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
@@ -38,16 +40,101 @@
 
 
 </head>
-<body>
-<div class="container" style="padding: 30px;">
-	<div class="row justify-content-center">
-		<a href="{% url 'home' %}" style="padding-left: 5%;" title="Go Home"><i class="fas fa-home fa-lg"
-																																						style="color: #5a6268;"></i> </a>
-		<a href="{% url 'logout' %}" style="float: right; padding-right: 5%;" title="Logout"><i
-			class="fas fa-sign-out-alt fa-lg" style="color: #5a6268;"></i> </a><br><br>
-		<h2 class="text-center">Franq Test</h2>
-		<h4 class="text-center" style="margin-bottom:25px;">By <a href="https://vitorcunha.me">Vítor Cunha</a></h4>
+{% if user.is_authenticated %}
+	<body id="page-top">
+	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+		<a class="navbar-brand mr-1" href="#">Garage System</a>
+		<button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+			<i class="fas fa-bars"></i>
+		</button>
+	</nav>
+	<div id="wrapper">
+		<!-- Sidebar -->
+		<ul class="sidebar navbar-nav">
+			<li class="nav-item active">
+				<a class="nav-link" href="/core">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Navigation</span>
+				</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="{% url 'vehicle_list' %}">
+					<i class="fas fa-fw fa-car"></i>
+					<span>Vehicles Manager</span>
+				</a>
+			</li>
+			{% if request.user.is_superuser %}
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'users_list' %}">
+						<i class="fas fa-fw fa-user"></i>
+						<span>Users Manager</span>
+					</a>
+				</li>
+			{% endif %}
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'logout' %}">
+					<i class="fas fa-fw fa-sign-out-alt"></i>
+					<span>Logout</span>
+				</a>
+			</li>
+		</ul>
+		<div id="content-wrapper">
+			<div class="container-fluid">
+				{% block content %}
+					<p>Hello {{ request.user.first_name }} {{ request.user.last_name }}</p>
+					{% if request.user.is_superuser %}
+						<p>You are an Administrator.</p>
+					{% else %}
+						<p>You are a Consumer.</p>
+					{% endif %}
+					<p>Balance: {{ request.user.balance }}</p>
+					{% if garage %}
+						<br>
+						<br>
+						<table class="table table-bordered" width="100%" cellspacing="0" role="grid">
+						<div class="col-md-12">
+							<h4>My garage</h4>
+							<thead>
+							<tr role="row">
+								<th>Name</th>
+								<th>Type</th>
+								<th>Color</th>
+								<th>Year</th>
+								<th>Price</th>
+								<th>Icon</th>
+							</tr>
+							</thead>
+							<tbody>
+							{% for vehicle in garage %}
+								<tr role="row">
+									<td style="vertical-align: middle">{{ vehicle.name }}</td>
+									<td style="vertical-align: middle">{{ vehicle.get_type_display }}</td>
+									<td style="vertical-align: middle">{{ vehicle.color }}</td>
+									<td style="vertical-align: middle">{{ vehicle.year }}</td>
+									<td style="vertical-align: middle">{{ vehicle.price }}</td>
+									<td><img src="/media/{{ vehicle.icon }}" height="60" width="60"></td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</div>
+					{% endif %}
+				</table>
+				{% endblock %}
+			</div>
+		</div>
+		<!-- /.content-wrapper -->
 	</div>
-</div>
-</body>
+	<!-- /#wrapper -->
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top">
+		<i class="fas fa-angle-up"></i>
+	</a>
+	</body>
+{% else %}
+	<p>You are not logged in.</p>
+	<a href="{% url 'login' %}">Login</a>
+	<p>Do not have an account? Register below.</p>
+	<a href="{% url 'register' %}">Register</a>
+{% endif %}
+
 </html>

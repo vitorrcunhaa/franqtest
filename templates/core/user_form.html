@@ -1,10 +1,12 @@
 {% extends 'core/index.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 	<h3>Edit User {{ user.name }}</h3>
 	<form method="post" enctype="multipart/form-data">
 		{% csrf_token %}
-		{{ form.as_p }}
+		{{ form|crispy }}
 		<input type="submit" value="Submit"/>
 	</form>
 {% endblock %}
